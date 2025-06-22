@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Analisis Proyeksi Integral{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Analisis Proyeksi Integral</h2>
+
+  {% if error %}
+    <div class="alert alert-danger text-center">{{ error }}</div>
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="form-group">
+      <label>Unggah Gambar Grayscale:</label>
+      <input type="file" name="file" class="form-control-file" required>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Analisis</button>
+  </form>
+
+  {% if plot_img %}
+  <div class="text-center mt-4">
+    <h5>Hasil Proyeksi Integral</h5>
+    <img src="{{ plot_img }}" class="img-fluid rounded shadow">
+  </div>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary">Kembali ke Home</a>
+  </div>
+</div>
+{% endblock %}

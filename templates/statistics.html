@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Tambah Wajah Baru{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Tambah Wajah Baru ke Dataset</h2>
+
+  {% if message %}
+    <div class="alert alert-{{ 'success' if success else 'danger' }} text-center">
+      {{ message }}
+    </div>
+  {% endif %}
+
+  <form method="post" action="/capture_faces">
+    <div class="form-group">
+      <label for="name">Masukkan nama orang baru:</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-primary">Tambahkan Wajah Baru</button>
+    </div>
+  </form>
+
+  <p class="text-center mt-4">
+    Sistem akan menggunakan webcam dan menyimpan 20 gambar wajah ke folder dataset.
+  </p>
+
+  <div class="text-center mt-3">
+    <a href="/" class="btn btn-secondary">Kembali ke Home</a>
+  </div>
+</div>
+{% endblock %}

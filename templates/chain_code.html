@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Analisis Kode Rantai{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Analisis Freeman Chain Code</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>Unggah Gambar:</label>
+      <input type="file" name="file" class="form-control-file" required>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Proses</button>
+  </form>
+
+  {% if gray_img %}
+  <div class="row mt-4">
+    <div class="col-md-4 text-center">
+      <h5>Citra Grayscale</h5>
+      <img src="{{ gray_img }}" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-4 text-center">
+      <h5>Citra Biner</h5>
+      <img src="{{ binary_img }}" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-4 text-center">
+      <h5>Kontur Terbesar</h5>
+      <img src="{{ contour_img }}" class="img-fluid rounded shadow">
+    </div>
+  </div>
+  <div class="mt-4">
+    <h5>Hasil Kode Rantai:</h5>
+    <pre style="background:#f8f9fa; padding:15px; border-radius:5px; white-space:pre-wrap;">
+{{ chain_code_text }}
+    </pre>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

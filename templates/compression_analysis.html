@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Analisis Kompresi{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Analisis Kompresi (JPEG & PNG)</h2>
+
+  <form method="post" enctype="multipart/form-data" class="mt-4 text-center">
+    <div class="mb-3">
+      <input type="file" name="file" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload & Analisis</button>
+  </form>
+
+  {% if error %}
+  <div class="alert alert-danger mt-3 text-center">
+    {{ error }}
+  </div>
+  {% endif %}
+
+  {% if plot_img %}
+  <div class="mt-5 text-center">
+    <h4>Grafik Perbandingan PSNR dan SSIM</h4>
+    <img src="{{ plot_img }}" class="img-fluid rounded shadow" alt="Grafik Kompresi">
+  </div>
+  {% endif %}
+
+  
+  {% if size_plot_img %}
+  <div class="mt-5 text-center">
+    <h4>Grafik Perbandingan Ukuran</h4>
+    <img src="{{ size_plot_img }}" class="img-fluid rounded shadow" alt="Grafik Ukuran Kompresi">
+  </div>
+  {% endif %}
+
+
+  {% if results %}
+  <div class="mt-4">
+    <h4 class="text-center">Tabel Hasil Analisis</h4>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped mt-3">
+        <thead class="table-dark">
+          <tr>
+            <th>Metode</th>
+            <th>Kualitas</th>
+            <th>Ukuran (KB)</th>
+            <th>Rasio Kompresi</th>
+            <th>PSNR (dB)</th>
+            <th>SSIM</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in results %}
+          <tr>
+            <td>{{ row.Method }}</td>
+            <td>{{ row.Quality }}</td>
+            <td>{{ "%.2f"|format(row["SizeKB"]) }}</td>
+            <td>{{ "%.2f"|format(row["Ratio"]) }}</td>
+            <td>{{ "%.2f"|format(row["PSNR"]) }}</td>
+            <td>{{ "%.4f"|format(row["SSIM"]) if row["SSIM"] is not none else "N/A" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary">Kembali ke Beranda</a>
+  </div>
+</div>
+{% endblock %}

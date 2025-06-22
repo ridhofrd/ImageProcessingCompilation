@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Deteksi Tepi Canny{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Deteksi Tepi Canny</h2>
+
+  {% if error %}
+    <div class="alert alert-danger text-center">{{ error }}</div>
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="form-group">
+      <label>Unggah Gambar:</label>
+      <input type="file" name="file" class="form-control-file" required>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Proses</button>
+  </form>
+
+  {% if orig_img %}
+  <div class="row mt-4">
+    <div class="col-md-4 text-center">
+      <h5>Citra Asli</h5>
+      <img src="{{ orig_img }}" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-4 text-center">
+      <h5>Grayscale + Blur</h5>
+      <img src="{{ blur_img }}" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-4 text-center">
+      <h5>Tepi Canny (Th={{ low_threshold }}, {{ high_threshold }})</h5>
+      <img src="{{ edge_img }}" class="img-fluid rounded shadow">
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary">Kembali ke Home</a>
+  </div>
+</div>
+{% endblock %}

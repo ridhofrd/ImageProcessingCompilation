@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Analisis Tekstur{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center">Analisis Tekstur Citra</h2>
+
+  {% if error %}
+    <div class="alert alert-danger text-center">{{ error }}</div>
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="form-group">
+      <label>Unggah Gambar:</label>
+      <input type="file" name="file" class="form-control-file" required>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Analisis Tekstur</button>
+  </form>
+
+  {% if result %}
+  <div class="mt-4">
+    <h5>Visualisasi</h5>
+    <div class="row mb-4">
+      <div class="col-md-6 text-center">
+        <p>Original dan Grayscale</p>
+        <img src="{{ result.original }}" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-6 text-center">
+        <p>GLCM</p>
+        <img src="{{ result.glcm }}" class="img-fluid rounded shadow">
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-6 text-center">
+        <p>LBP dan Histogram</p>
+        <img src="{{ result.lbp }}" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-6 text-center">
+        <p>Law's Texture Energy</p>
+        <img src="{{ result.law }}" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary">Kembali ke Home</a>
+  </div>
+</div>
+{% endblock %}
